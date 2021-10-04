@@ -17,6 +17,7 @@ def get_data(config_path):
     create_directory(dirs=[raw_local_dir_path])
     print(raw_local_file_path)
     df.to_csv(raw_local_file_path,sep=",",index=False)
+    
 
 '''
 def create_directory(dirs: list):
