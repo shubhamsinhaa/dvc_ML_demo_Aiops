@@ -18,3 +18,34 @@ stages:
       size: 93599
   always_run:
     cmd: python rough/test.py
+    deps:
+    - path: rough/test.py
+      md5: cb7c0d32eca431e5bc2b7db9fb8a644a
+      size: 201
+    outs:
+    - path: rough/test.txt
+      md5: a5890ace30a3e84d9118196c161aeec2
+      size: 19
+  split_data:
+    cmd: python src/stage_02_split_data.py --config=config/config.yaml --params=params.yaml
+    deps:
+    - path: config/config.yaml
+      md5: 6a959674e8e69a506541884baec0cd6a
+      size: 308
+    - path: src/stage_02_split_data.py
+      md5: de7821e201dd2039cd9ab0b465e5f037
+      size: 1863
+    - path: src/utils/all_utils.py
+      md5: 287aec4f151d9d21fff2e0121e5cb961
+      size: 500
+    params:
+      params.yaml:
+        base.random_state: 42
+        base.test_size: 0.3
+    outs:
+    - path: artifacts/split_data_dir/test.csv
+      md5: 2234775402fc50bcee60bfbfd1cfb1d5
+      size: 28263
+    - path: artifacts/split_data_dir/train.csv
+      md5: e683c1d146b604dc7ac3a46cfcc079c4
+      size: 65483

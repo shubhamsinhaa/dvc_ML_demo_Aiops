@@ -1,11 +1,21 @@
 stages:
   always_run:
     cmd: python rough/test.py
-  load_data:
-    cmd: python src/stage_01_load_save.py --config=config/config.yaml
     deps:
-      - src/stage_01_load_save.py
+      - rough/test.py
+    outs: 
+      - rough/test.txt
+  split_data:
+    cmd: python src/stage_02_split_data.py --config=config/config.yaml --params=params.yaml
+    deps:
+      - src/stage_02_split_data.py
       - src/utils/all_utils.py
       - config/config.yaml
+    params:
+      - base.random_state
+      - base.test_size
+    
     outs:
-      - artifacts/raw_local_dir/data.csv
+      - artifacts/split_data_dir/train.csv
+      - artifacts/split_data_dir/test.csv 
+
